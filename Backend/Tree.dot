@@ -1,0 +1,53 @@
+digraph grafica{
+rankdir=TB;
+node [shape = record, style=filled, fillcolor=seashell2];
+subgraph cluster_s {
+ label=""
+tbl_s [shape=box, label=<
+<TABLE><tr> <td colspan="2" bgcolor="yellow">Inodo 1</td> </tr><tr>
+					<td>apt: 1</td>
+					<td>48</td>
+				</tr><tr>
+					<td>apt: 2</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 3</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 4</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 5</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 6</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 7</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 8</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 9</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 10</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 11</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 12</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 13</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 14</td>
+					<td>36</td>
+				</tr><tr>
+					<td>apt: 15</td>
+					<td>36</td>
+				</tr></TABLE>>];}
+}

@@ -1,0 +1,59 @@
+
+pause
+
+#CREACION DE DISCOS---------------------------------------------------
+Mkdisk -size=50 -unit=M -fit=FF                  
+Mkdisk -unit=k -size=51200 -fit=BF               
+mkDisk -size=13
+
+#ELIMINACION DE DISCOS---------------------------------------------------
+rmdisk -driveletter=Z
+rmdisk -driveletter=C
+
+#CREACION DE PARTICIONES---------------------------------------------------
+#DISCO 1
+fdisk -type=P -unit=b -name=Part0 -size=10485760 -driveletter=Z -fit=BF
+fdisk -type=P -unit=b -name=Part1 -size=10485760 -driveletter=A -fit=BF
+fdisk -type=P -unit=k -name=Part2 -size=10240 -driveletter=A -fit=BF
+fdisk -type=E -unit=M -name=Part3 -size=10 -driveletter=A -fit=BF
+fdisk -type=L -unit=k -name=Part6 -size=10240 -driveletter=A -fit=BF
+fdisk -type=L -unit=k -name=Part7 -size=10240 -driveletter=A -fit=BF
+
+fdisk -delete=full -name=Part27 -driveletter=C
+
+mount -driveletter=A -name=Part0
+#DISCO 1
+mount -driveletter=A -name=Part1
+mount -driveletter=A -name=Part2
+
+#DESMONTAR PARTICIONES---------------------------------------------------
+unmount -id=IDx
+
+#DISCO 1
+unmount -id=A170
+unmount -id=A170
+
+#REPORTES---------------------------------------------------
+#DISCO 1
+rep -id=A -Path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte1.jpg -name=mbr
+rep -id=A -Path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte2.jpg -name=disk
+
+#DISCO 2
+rep -id=B -Path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte3.jpg -name=mbr
+rep -id=B -Path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte4.jpg -name=disk
+
+#CREACION DE SISTEMA DE ARCHIVOS------------------------------------------------
+mkfs -type=full -id=A270 -fs=2fs
+
+#------------------------REPORTES 1----------------
+rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte1_sb.jpg -name=sb
+rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte1_tree.jpg -name=tree
+
+
+#LOGIN------------------------------------------------
+login -user=root -pass=123 -id=A270
+
+rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte5_inode.jpg -name=inode
+rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte5_block.jpg -name=block
+rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte5_bm_inode.jpg -name=bm_inode
+rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte5_bm_block.jpg -name=bm_block

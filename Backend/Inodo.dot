@@ -1,0 +1,56 @@
+digraph G{
+subgraph cluster_0{
+ label="Inodo0"
+tbl_0[shape=box, label=<
+<table border='0' cellborder='1' cellspacing='0'  width='300' height='160' >
+<tr><td width='150' bgcolor="pink"><b>I_uid</b></td><td width='150' bgcolor="pink">1</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_gid</b></td><td width='150' bgcolor="pink">1</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_size</b></td><td width='150' bgcolor="pink">0</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_atime</b></td><td width='150' bgcolor="pink">"09/04/2024 04:59:40"</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_ctime</b></td><td width='150' bgcolor="pink">"09/04/2024 04:59:40"</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_mtime</b></td><td width='150' bgcolor="pink">"09/04/2024 04:59:40"</td></tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc1</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc2</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc3</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc4</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc5</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc6</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc7</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc8</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc9</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc10</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc11</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc12</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc13</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc14</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr><td width='150' bgcolor="pink"><b>I_type</b></td><td width='150' bgcolor="pink">0</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_perm</b></td><td width='150' bgcolor="pink">664</td></tr>
+</table>>];}
+subgraph cluster_1{
+ label="Inodo1"
+tbl_1[shape=box, label=<
+<table border='0' cellborder='1' cellspacing='0'  width='300' height='160' >
+<tr><td width='150' bgcolor="pink"><b>I_uid</b></td><td width='150' bgcolor="pink">1</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_gid</b></td><td width='150' bgcolor="pink">1</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_size</b></td><td width='150' bgcolor="pink">0</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_atime</b></td><td width='150' bgcolor="pink">"09/04/2024 04:59:40"</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_ctime</b></td><td width='150' bgcolor="pink">"09/04/2024 04:59:40"</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_mtime</b></td><td width='150' bgcolor="pink">"09/04/2024 04:59:40"</td></tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc1</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc2</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc3</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc4</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc5</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc6</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc7</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc8</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc9</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc10</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc11</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc12</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc13</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr>  <td width='150' bgcolor="pink"><b>I_bloc14</b></td><td width='150' bgcolor="pink">$</td>  </tr>
+<tr><td width='150' bgcolor="pink"><b>I_type</b></td><td width='150' bgcolor="pink">0</td></tr>
+<tr><td width='150' bgcolor="pink"><b>I_perm</b></td><td width='150' bgcolor="pink">664</td></tr>
+</table>>];}
+}

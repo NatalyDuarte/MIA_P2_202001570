@@ -1,0 +1,28 @@
+digraph G{
+subgraph cluster_0{
+ label="Bloque Carpeta0"
+tbl_0[shape=box, label=<
+<table border='0' cellborder='1' cellspacing='0'  width='300' height='160' >
+<tr><td width='150' bgcolor="pink"><b>B_name</b></td><td width='150' bgcolor="pink">.</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_inodo</b></td><td width='150' bgcolor="pink">0</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_name</b></td><td width='150' bgcolor="pink">..</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_inodo</b></td><td width='150' bgcolor="pink">0</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_name</b></td><td width='150' bgcolor="pink">users.txt</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_inodo</b></td><td width='150' bgcolor="pink">1</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_name</b></td><td width='150' bgcolor="pink">.</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_inodo</b></td><td width='150' bgcolor="pink">-1</td></tr>
+</table>>];}
+subgraph cluster_1{
+ label="Bloque Carpeta1"
+tbl_1[shape=box, label=<
+<table border='0' cellborder='1' cellspacing='0'  width='300' height='160' >
+<tr><td width='150' bgcolor="pink"><b>B_name</b></td><td width='150' bgcolor="pink">.</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_inodo</b></td><td width='150' bgcolor="pink">0</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_name</b></td><td width='150' bgcolor="pink">..</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_inodo</b></td><td width='150' bgcolor="pink">0</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_name</b></td><td width='150' bgcolor="pink">users.txt</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_inodo</b></td><td width='150' bgcolor="pink">1</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_name</b></td><td width='150' bgcolor="pink">.</td></tr>
+<tr><td width='150' bgcolor="pink"><b>B_inodo</b></td><td width='150' bgcolor="pink">-1</td></tr>
+</table>>];}
+}

@@ -12,7 +12,7 @@ import (
 var valorpathmo string = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
 
 func Mount(arre_coman []string) {
-	Salid_comando += "=========================MOUNT==========================" + "\n"
+	Salid_comando += "===================MOUNT====================" + "\n"
 
 	val_path := ""
 	band_path := true

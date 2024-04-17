@@ -71,7 +71,6 @@ func Split_comando(comando string) {
 
 func Ejecutar_comando(arre_coman []string) {
 	data := strings.ToLower(arre_coman[0])
-
 	if data == "mkdisk" {
 		/*=======================MKDISK================== */
 		comandos.Salid_comando = ""
@@ -118,9 +117,19 @@ func Ejecutar_comando(arre_coman []string) {
 		comandos.Mkfs(arre_coman)
 		Salida_comando += comandos.Salid_comando
 	} else if data == "login" {
-		/*========================MKFS================== */
+		/*========================LOGIN================== */
 		comandos.Salid_comando = ""
 		comandos.Login(arre_coman)
+		Salida_comando += comandos.Salid_comando
+	} else if data == "logout" {
+		/*========================LOGOUT================== */
+		comandos.Salid_comando = ""
+		comandos.Logout(arre_coman)
+		Salida_comando += comandos.Salid_comando
+	} else if data == "mkgrp" {
+		/*========================MKFS================== */
+		comandos.Salid_comando = ""
+		comandos.Mkgrp(arre_coman)
 		Salida_comando += comandos.Salid_comando
 	} else {
 		/*=======================ERROR=================== */
@@ -133,7 +142,7 @@ func pause() {
 }
 
 func Execute(arre_coman []string) {
-	Salida_comando += "==============EXECUTE=======================" + "\n"
+	Salida_comando += "==================EXECUTE=======================" + "\n"
 	val_path := ""
 
 	band_path := false

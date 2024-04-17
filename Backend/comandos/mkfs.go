@@ -13,7 +13,7 @@ import (
 )
 
 func Mkfs(arre_coman []string) {
-	Salid_comando += "=========================MKFS==========================" + "\n"
+	Salid_comando += "====================MKFS====================" + "\n"
 
 	val_id := ""
 	band_id := false

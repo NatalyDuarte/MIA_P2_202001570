@@ -4,8 +4,8 @@ label="REPORTE DE MBR"
 tbl[shape=box,label=<
 <table border='0' cellborder='1' cellspacing='0' width='300'  height='200' >
 <tr> <td width='150' bgcolor="pink"><b>Mbr_tamano</b></td><td width='150' bgcolor="pink">52428800</td>  </tr>
-<tr>  <td bgcolor="pink"><b>Mbr_fecha_creacion</b></td><td bgcolor="pink">09/04/2024 04:59:10</td>  </tr>
-<tr>  <td bgcolor="pink"><b>Mbr_dsk_signature</b></td><td bgcolor="pink">84</td>  </tr>
+<tr>  <td bgcolor="pink"><b>Mbr_fecha_creacion</b></td><td bgcolor="pink">10/04/2024 20:44:14</td>  </tr>
+<tr>  <td bgcolor="pink"><b>Mbr_dsk_signature</b></td><td bgcolor="pink">56</td>  </tr>
 <tr>  <td bgcolor="pink"><b>Dsk_fit</b></td><td bgcolor="pink">f</td>  </tr></table>
 >];
 }}

@@ -14,7 +14,7 @@ import (
 var valorpathfd string = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2"
 
 func Fdisk(commandArray []string) {
-	Salid_comando += "=========================FDISK==========================" + "\n"
+	Salid_comando += "=====================FDISK=======================" + "\n"
 
 	val_size := 0
 	val_unit := "k"

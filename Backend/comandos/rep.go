@@ -16,7 +16,7 @@ import (
 var val_rutadis string = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
 
 func Rep(arre_coman []string) {
-	Salid_comando += "==========================REP==========================" + "\n"
+	Salid_comando += "=======================REP=======================" + "\n"
 
 	val_path := ""
 	band_path := false

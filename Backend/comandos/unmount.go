@@ -9,7 +9,7 @@ import (
 )
 
 func Unmount(arre_coman []string) {
-	Salid_comando += "=========================UNMOUNT==========================" + "\n"
+	Salid_comando += "===================UNMOUNT====================" + "\n"
 
 	val_path := ""
 	band_path := true

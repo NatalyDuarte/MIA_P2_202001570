@@ -16,7 +16,7 @@ var valorpathrm string = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_20200
 var pathrm string = ""
 
 func Rmdisk(arre_coman []string) {
-	Salid_comando += "=========================RMDISK==========================" + "\n"
+	Salid_comando += "======================RMDISK=======================" + "\n"
 
 	val_path := "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2"
 	band_path := true

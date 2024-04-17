@@ -1,0 +1,24 @@
+pause
+
+#CREACION DE DISCOS---------------------------------------------------
+Mkdisk -size=50 -unit=M -fit=FF                  
+Mkdisk -unit=k -size=51200 -fit=BF 
+
+#CREACION DE PARTICIONES---------------------------------------------------
+fdisk -type=P -unit=b -name=Part1 -size=10485760 -driveletter=A -fit=BF
+fdisk -type=P -unit=k -name=Part2 -size=10240 -driveletter=A -fit=BF
+
+#DISCO 1
+mount -driveletter=A -name=Part1
+mount -driveletter=A -name=Part2
+
+#DISCO 1
+unmount -id=A170
+
+#CREACION DE SISTEMA DE ARCHIVOS------------------------------------------------
+mkfs -type=full -id=A270 -fs=2fs
+
+#LOGIN------------------------------------------------
+#login -user=root -pass=123 -id=A270
+#logout
+#mkgrp -name=usuarios

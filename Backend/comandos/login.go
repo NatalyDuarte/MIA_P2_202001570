@@ -10,8 +10,12 @@ import (
 	"unsafe"
 )
 
+var iniciose string = ""
+var particion string = ""
+var discos string = ""
+
 func Login(arre_coman []string) {
-	Salid_comando += "=========================LOGIN==========================" + "\n"
+	Salid_comando += "===================LOGIN====================" + "\n"
 
 	val_rutadis := "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
 	band_path := true
@@ -56,6 +60,7 @@ func Login(arre_coman []string) {
 				break
 			}
 			val_id = val_data
+			particion = val_id
 			band_id = true
 		default:
 			Salid_comando += "Error: Parametro no valido." + "\n"
@@ -71,6 +76,7 @@ func Login(arre_coman []string) {
 						letters := regex.FindString(val_id)
 						val_rutadis = val_rutadis + letters + ".dsk"
 						Salid_comando += "Disco:" + letters + "\n"
+						discos = val_rutadis
 						mbr := estructuras.Mbr{}
 						sb := estructuras.Super_bloque{}
 						disco, err := os.OpenFile(val_rutadis, os.O_RDWR, 0660)
@@ -100,32 +106,81 @@ func Login(arre_coman []string) {
 						}
 
 						if band_enc {
-							s_part_startas := string(mbr.Mbr_partition[numero_parti].Part_start[:])
-							s_part_startas = strings.Trim(s_part_startas, "\x00")
-							part_starta, err := strconv.Atoi(s_part_startas)
-							if err != nil {
-								Mens_error(err)
-							}
-							disco.Seek(int64(part_starta), 0)
-							err = binary.Read(disco, binary.BigEndian, &sb)
-							if sb.S_filesystem_type != empty {
-								inodeA := estructuras.Inodo{}
-								s_inodo_start := string(sb.S_inode_start[:])
-								s_inodo_start = strings.Trim(s_inodo_start, "\x00")
-								inodo_start, err := strconv.Atoi(s_inodo_start)
+							if iniciose == "" {
+								s_part_startas := string(mbr.Mbr_partition[numero_parti].Part_start[:])
+								s_part_startas = strings.Trim(s_part_startas, "\x00")
+								part_starta, err := strconv.Atoi(s_part_startas)
 								if err != nil {
 									Mens_error(err)
 								}
-								disco.Seek(int64(int32(inodo_start)+int32(unsafe.Sizeof(estructuras.Inodo{}))), 0)
-								err = binary.Read(disco, binary.LittleEndian, &inodeA)
-								if err != nil {
-									Salid_comando += "Error: Al leer un Inode en el archivo " + val_rutadis + "\n"
+								disco.Seek(int64(part_starta), 0)
+								err = binary.Read(disco, binary.BigEndian, &sb)
+								if sb.S_filesystem_type != empty {
+									inodeA := estructuras.Inodo{}
+									s_inodo_start := string(sb.S_inode_start[:])
+									s_inodo_start = strings.Trim(s_inodo_start, "\x00")
+									inodo_start, err := strconv.Atoi(s_inodo_start)
+									if err != nil {
+										Mens_error(err)
+									}
+									disco.Seek(int64(int32(inodo_start)+int32(unsafe.Sizeof(estructuras.Inodo{}))), 0)
+									err = binary.Read(disco, binary.LittleEndian, &inodeA)
+									if err != nil {
+										Salid_comando += "Error: Al leer un Inode en el archivo " + val_rutadis + "\n"
+									}
+									tmpString := ""
+									for i := 0; i < 15; i++ {
+										block_i := string(inodeA.I_block[i])
+										block_i = strings.Trim(block_i, "\x00")
+										if block_i != "$" {
+											blockFile := estructuras.Bloque_archivo{}
+											s_block_start := string(sb.S_block_start[:])
+											s_block_start = strings.Trim(s_block_start, "\x00")
+											block_start, err := strconv.Atoi(s_block_start)
+											if err != nil {
+												Mens_error(err)
+											}
+											I_block := string(inodeA.I_block[i])
+											I_block = strings.Trim(I_block, "\x00")
+											block_i, err := strconv.Atoi(I_block)
+											if err != nil {
+												Mens_error(err)
+											}
+											pos := int32(block_start) + int32(block_i)*int32(unsafe.Sizeof(estructuras.Bloque_carpeta{}))
+											disco.Seek(int64(pos), 0)
+											err = binary.Read(disco, binary.LittleEndian, &blockFile)
+											if err != nil {
+												Salid_comando += "Error al leer un bloque_archivo en el archivo"
+											}
+											tmp1 := string(blockFile.B_content[:])
+											tmpString += tmp1
+										}
+									}
+									res1 := strings.Split(tmpString, "\n")
+									for i := 0; i < len(res1); i++ {
+										res2 := strings.Split(res1[i], ",")
+										if len(res2) > 2 && res2[1] == "U" {
+											if res2[3] == val_user {
+												if res2[4] == val_pass {
+													Salid_comando += "Sesion iniciada" + "\n"
+													iniciose = val_user
+												} else {
+													Salid_comando += "Error: Contraseña incorrecta" + "\n"
+												}
+											} else {
+												Salid_comando += "Error: Usuario no encontrado" + "\n"
+											}
+										}
+									}
 								}
-								Salid_comando += val_user + "\n"
-								Salid_comando += val_pass + "\n"
-							}
-						}
 
+							} else {
+								Salid_comando += "Error: Ya hay una sesion iniciada" + "\n"
+							}
+
+						} else {
+							Salid_comando += "Error: No se encontro la particion o no esta montada" + "\n"
+						}
 					} else {
 						Salid_comando += "Error: No se encontro el valor id" + "\n"
 					}

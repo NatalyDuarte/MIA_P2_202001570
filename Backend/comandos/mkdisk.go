@@ -31,7 +31,7 @@ var posicion = 0
 var Salid_comando string = ""
 
 func Mkdisk(arre_coman []string) {
-	Salid_comando += "=========================MKDISK==========================" + "\n"
+	Salid_comando += "=====================MKDISK======================" + "\n"
 
 	val_size := 0
 	val_fit := "ff"

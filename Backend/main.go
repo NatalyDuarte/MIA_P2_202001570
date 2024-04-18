@@ -131,6 +131,11 @@ func Ejecutar_comando(arre_coman []string) {
 		comandos.Salid_comando = ""
 		comandos.Mkgrp(arre_coman)
 		Salida_comando += comandos.Salid_comando
+	} else if data == "mkfile" {
+		/*========================MKFILE================== */
+		comandos.Salid_comando = ""
+		comandos.Mkfile(arre_coman)
+		Salida_comando += comandos.Salid_comando
 	} else {
 		/*=======================ERROR=================== */
 		Salida_comando += "Error: El comando no fue reconocido." + "\n"

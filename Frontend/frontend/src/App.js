@@ -307,16 +307,6 @@ function App() {
               <textarea id="entrada" rows="20" cols="50"></textarea>
             </div>
             <div>
-              <input
-                id="fileInput"
-                type="file"
-                style={{ display: 'none' }}
-                onChange={handleFileChange}
-              />
-              <button onClick={handleUploadClick}>Cargar Archivo</button>
-              {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
-            </div>
-            <div>
               <p>
                 <div id="boton-y-caja">  
                   <input type="text" id="parametros" placeholder="Ingrese comandos"></input>

@@ -7,7 +7,7 @@ tbl[shape=box,label=<
 <tr><td bgcolor="green"><b>S_blocks_count </b></td><td bgcolor="green">28107</td> </tr>
 <tr><td><b>S_free_blocks_count</b></td><td>28105</td> </tr>
 <tr><td bgcolor="green"><b>S_free_inodes_count</b></td><td bgcolor="green">9367</td> </tr>
-<tr><td><b>S_mtime</b></td><td>16/04/2024 04:15:39</td> </tr>
+<tr><td><b>S_mtime</b></td><td>17/04/2024 04:57:44</td> </tr>
 <tr><td bgcolor="green"><b>S_umtime</b></td><td bgcolor="green"></td> </tr>
 <tr><td><b>S_mnt_count</b></td><td>0</td> </tr>
 <tr><td bgcolor="green"><b>S_magic</b></td><td bgcolor="green">0xEF53</td> </tr>

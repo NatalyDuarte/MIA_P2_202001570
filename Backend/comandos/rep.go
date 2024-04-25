@@ -16,7 +16,7 @@ import (
 var val_rutadis string = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
 
 func Rep(arre_coman []string) {
-	Salid_comando += "=======================REP=======================" + "\n"
+	//Salid_comando += "=======================REP=======================" + "\n"
 
 	val_path := ""
 	band_path := false
@@ -131,10 +131,10 @@ func RepoMbr(path string, id string) {
 			break
 		}
 	}
-
-	Salid_comando += "Carpeta:" + carpeta + "\n"
-	Salid_comando += "Archivo:" + archivo + "\n"
-	Salid_comando += "Disco:" + id + "\n"
+	fmt.Println(archivo)
+	//Salid_comando += "Carpeta:" + carpeta + "\n"
+	//Salid_comando += "Archivo:" + archivo + "\n"
+	//Salid_comando += "Disco:" + id + "\n"
 	val_rutadis = val_rutadis + id + ".dsk"
 
 	_, err := os.Stat(carpeta)
@@ -153,7 +153,7 @@ func RepoMbr(path string, id string) {
 		}
 	}
 
-	Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
+	//Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
 
 	var buffer string
 	buffer += "digraph G{\nsubgraph cluster{\nlabel=\"REPORTE DE MBR\"\ntbl[shape=box,label=<\n<table border='0' cellborder='1' cellspacing='0' width='300'  height='200' >\n"
@@ -286,6 +286,7 @@ func RepoMbr(path string, id string) {
 			}
 		}
 		buffer += "}\n"
+		Salid_comando += buffer
 		file, err2 := os.Create("Mbr.dot")
 		if err2 != nil && !os.IsExist(err) {
 			log.Fatal(err2)
@@ -307,7 +308,7 @@ func RepoMbr(path string, id string) {
 			fmt.Errorf("no se pudo generar la imagen: %v", err)
 		}
 		val_rutadis = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
-		Salid_comando += "Reporte Mbr-Ebr creado exitosamente" + "\n"
+		//Salid_comando += "Reporte Mbr-Ebr creado exitosamente" + "\n"
 	}
 
 }
@@ -352,11 +353,11 @@ func ReporteSb(path string, id string) {
 			break
 		}
 	}
-
-	Salid_comando += "Carpeta:" + carpeta + "\n"
-	Salid_comando += "Archivo:" + archivo + "\n"
+	fmt.Println(archivo)
+	//Salid_comando += "Carpeta:" + carpeta + "\n"
+	//Salid_comando += "Archivo:" + archivo + "\n"
 	letters := regex.FindString(id)
-	Salid_comando += "Disco:" + letters + "\n"
+	//Salid_comando += "Disco:" + letters + "\n"
 
 	val_rutadis = val_rutadis + letters + ".dsk"
 
@@ -376,7 +377,7 @@ func ReporteSb(path string, id string) {
 		}
 	}
 
-	Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
+	//Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
 	mbr := estructuras.Mbr{}
 	sb := estructuras.Super_bloque{}
 	disco, err := os.OpenFile(val_rutadis, os.O_RDWR, 0660)
@@ -474,7 +475,7 @@ func ReporteSb(path string, id string) {
 		}
 
 	}
-
+	Salid_comando += buffer
 	file, err2 := os.Create("Super.dot")
 	if err2 != nil && !os.IsExist(err) {
 		log.Fatal(err2)
@@ -496,7 +497,7 @@ func ReporteSb(path string, id string) {
 		fmt.Errorf("no se pudo generar la imagen: %v", err)
 	}
 	val_rutadis = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
-	Salid_comando += "Reporte Super Blocke creado exitosamente" + "\n"
+	//Salid_comando += "Reporte Super Blocke creado exitosamente" + "\n"
 }
 
 func RepoDisk(path string, id string) {
@@ -634,6 +635,7 @@ func RepoDisk(path string, id string) {
 		buffer += "<td height='30' width='75.0'>Libre: " + strconv.Itoa(int(PorcentajeUtilizao)) + "%</td>"
 	}
 	buffer += "     </tr>\n</table>\n>];\n}"
+	Salid_comando += buffer
 	file, err2 := os.Create("Disk.dot")
 	if err2 != nil && !os.IsExist(err) {
 		log.Fatal(err2)
@@ -655,7 +657,7 @@ func RepoDisk(path string, id string) {
 		fmt.Errorf("no se pudo generar la imagen: %v", err)
 	}
 	val_rutadis = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
-	Salid_comando += "Reporte Disk creado exitosamente" + "\n"
+	//Salid_comando += "Reporte Disk creado exitosamente" + "\n"
 }
 
 func ReporteInode(path string, id string) {
@@ -669,11 +671,11 @@ func ReporteInode(path string, id string) {
 			break
 		}
 	}
-
-	Salid_comando += "Carpeta:" + carpeta + "\n"
-	Salid_comando += "Archivo:" + archivo + "\n"
+	fmt.Println(archivo)
+	//Salid_comando += "Carpeta:" + carpeta + "\n"
+	//Salid_comando += "Archivo:" + archivo + "\n"
 	letters := regex.FindString(id)
-	Salid_comando += "Disco:" + letters + "\n"
+	//Salid_comando += "Disco:" + letters + "\n"
 
 	val_rutadis = val_rutadis + letters + ".dsk"
 
@@ -692,7 +694,7 @@ func ReporteInode(path string, id string) {
 			return
 		}
 	}
-	Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
+	//Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
 	mbr := estructuras.Mbr{}
 	sb := estructuras.Super_bloque{}
 	disco, err := os.OpenFile(val_rutadis, os.O_RDWR, 0660)
@@ -793,6 +795,7 @@ func ReporteInode(path string, id string) {
 				buffer += "</table>>];}\n"
 			}
 			buffer += "}\n"
+			Salid_comando += buffer
 			file, err2 := os.Create("Inodo.dot")
 			if err2 != nil && !os.IsExist(err) {
 				log.Fatal(err2)
@@ -814,7 +817,7 @@ func ReporteInode(path string, id string) {
 				fmt.Errorf("no se pudo generar la imagen: %v", err)
 			}
 			val_rutadis = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
-			Salid_comando += "Reporte Inodo creado exitosamente" + "\n"
+			//Salid_comando += "Reporte Inodo creado exitosamente" + "\n"
 		}
 
 	}
@@ -851,11 +854,11 @@ func ReporteBloque(path string, id string) {
 			break
 		}
 	}
-
-	Salid_comando += "Carpeta:" + carpeta + "\n"
-	Salid_comando += "Archivo:" + archivo + "\n"
+	fmt.Println(archivo)
+	//Salid_comando += "Carpeta:" + carpeta + "\n"
+	//Salid_comando += "Archivo:" + archivo + "\n"
 	letters := regex.FindString(id)
-	Salid_comando += "Disco:" + letters + "\n"
+	//Salid_comando += "Disco:" + letters + "\n"
 
 	val_rutadis = val_rutadis + letters + ".dsk"
 
@@ -874,7 +877,7 @@ func ReporteBloque(path string, id string) {
 			return
 		}
 	}
-	Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
+	//Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
 	mbr := estructuras.Mbr{}
 	sb := estructuras.Super_bloque{}
 	disco, err := os.OpenFile(val_rutadis, os.O_RDWR, 0660)
@@ -960,11 +963,13 @@ func ReporteBloque(path string, id string) {
 					}
 					buffer += "</table>>];}\n"
 				default:
-					Salid_comando += "Tipo desconocido" + "\n"
+					fmt.Println("Tipo desconocido")
+					//Salid_comando += "Tipo desconocido" + "\n"
 				}
 
 			}
 			buffer += "}\n"
+			Salid_comando += buffer
 			file, err2 := os.Create("Bloques.dot")
 			if err2 != nil && !os.IsExist(err) {
 				log.Fatal(err2)
@@ -986,7 +991,7 @@ func ReporteBloque(path string, id string) {
 				fmt.Errorf("no se pudo generar la imagen: %v", err)
 			}
 			val_rutadis = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
-			Salid_comando += "Reporte Bloques creado exitosamente" + "\n"
+			//Salid_comando += "Reporte Bloques creado exitosamente" + "\n"
 		}
 
 	}
@@ -1042,11 +1047,11 @@ func ReporteBmInode(path string, id string) {
 			break
 		}
 	}
-
-	Salid_comando += "Carpeta:" + carpeta + "\n"
-	Salid_comando += "Archivo:" + archivo + "\n"
+	fmt.Println(archivo)
+	//Salid_comando += "Carpeta:" + carpeta + "\n"
+	//Salid_comando += "Archivo:" + archivo + "\n"
 	letters := regex.FindString(id)
-	Salid_comando += "Disco:" + letters + "\n"
+	//Salid_comando += "Disco:" + letters + "\n"
 
 	val_rutadis = val_rutadis + letters + ".dsk"
 
@@ -1065,7 +1070,7 @@ func ReporteBmInode(path string, id string) {
 			return
 		}
 	}
-	Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
+	//Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
 	mbr := estructuras.Mbr{}
 	sb := estructuras.Super_bloque{}
 	disco, err := os.OpenFile(val_rutadis, os.O_RDWR, 0660)
@@ -1147,6 +1152,7 @@ func ReporteBmInode(path string, id string) {
 			buffer += "</td></tr>\n"
 			buffer += "</table>>];}\n"
 			buffer += "}\n"
+			Salid_comando += buffer
 			file, err2 := os.Create("Inodobt.dot")
 			if err2 != nil && !os.IsExist(err) {
 				log.Fatal(err2)
@@ -1168,7 +1174,7 @@ func ReporteBmInode(path string, id string) {
 				fmt.Errorf("no se pudo generar la imagen: %v", err)
 			}
 			val_rutadis = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
-			Salid_comando += "Reporte de Bitmap Inodo creado exitosamente" + "\n"
+			//Salid_comando += "Reporte de Bitmap Inodo creado exitosamente" + "\n"
 		}
 	}
 	defer func() {
@@ -1187,11 +1193,11 @@ func ReporteBmBlock(path string, id string) {
 			break
 		}
 	}
-
-	Salid_comando += "Carpeta:" + carpeta + "\n"
-	Salid_comando += "Archivo:" + archivo + "\n"
+	fmt.Println(archivo)
+	//Salid_comando += "Carpeta:" + carpeta + "\n"
+	//Salid_comando += "Archivo:" + archivo + "\n"
 	letters := regex.FindString(id)
-	Salid_comando += "Disco:" + letters + "\n"
+	//Salid_comando += "Disco:" + letters + "\n"
 
 	val_rutadis = val_rutadis + letters + ".dsk"
 
@@ -1210,7 +1216,7 @@ func ReporteBmBlock(path string, id string) {
 			return
 		}
 	}
-	Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
+	//Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
 	mbr := estructuras.Mbr{}
 	sb := estructuras.Super_bloque{}
 	disco, err := os.OpenFile(val_rutadis, os.O_RDWR, 0660)
@@ -1292,6 +1298,7 @@ func ReporteBmBlock(path string, id string) {
 			buffer += "</td></tr>\n"
 			buffer += "</table>>];}\n"
 			buffer += "}\n"
+			Salid_comando += buffer
 			file, err2 := os.Create("Bloquesbt.dot")
 			if err2 != nil && !os.IsExist(err) {
 				log.Fatal(err2)
@@ -1313,7 +1320,7 @@ func ReporteBmBlock(path string, id string) {
 				fmt.Errorf("no se pudo generar la imagen: %v", err)
 			}
 			val_rutadis = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
-			Salid_comando += "Reporte de Bitmap Bloques creado exitosamente" + "\n"
+			//Salid_comando += "Reporte de Bitmap Bloques creado exitosamente" + "\n"
 		}
 	}
 	defer func() {
@@ -1332,11 +1339,11 @@ func ReporteTree(path string, id string) {
 			break
 		}
 	}
-
-	Salid_comando += "Carpeta:" + carpeta + "\n"
-	Salid_comando += "Archivo:" + archivo + "\n"
+	fmt.Println(archivo)
+	//Salid_comando += "Carpeta:" + carpeta + "\n"
+	//Salid_comando += "Archivo:" + archivo + "\n"
 	letters := regex.FindString(id)
-	Salid_comando += "Disco:" + letters + "\n"
+	//Salid_comando += "Disco:" + letters + "\n"
 
 	val_rutadis = val_rutadis + letters + ".dsk"
 
@@ -1355,7 +1362,7 @@ func ReporteTree(path string, id string) {
 			return
 		}
 	}
-	Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
+	//Salid_comando += "La carpeta" + carpeta + "ya existe o se ha creado correctamente" + "\n"
 	mbr := estructuras.Mbr{}
 	sb := estructuras.Super_bloque{}
 	disco, err := os.OpenFile(val_rutadis, os.O_RDWR, 0660)
@@ -1442,7 +1449,8 @@ func ReporteTree(path string, id string) {
 					fmt.Println(tipo)
 					switch b := blocks.(type) {
 					case estructuras.Bloque_archivo:
-						Salid_comando += "bloque archivo" + "\n"
+						fmt.Println("Bloque Archivo")
+						//Salid_comando += "bloque archivo" + "\n"
 					case estructuras.Bloque_carpeta:
 						buffer += "subgraph cluster_" + strconv.Itoa(c) + "{\n label=\"Bloque Carpeta" + strconv.Itoa(c) + "\"\ntbl_" + strconv.Itoa(c) + "[shape=box, label=<\n"
 						celdas := "<TR><TD bgcolor=\"pink\">Bloque 1</TD><TD bgcolor=\"pink\"></TD></TR>"
@@ -1456,12 +1464,14 @@ func ReporteTree(path string, id string) {
 						buffer += "<" + etiquetaInicio + celdas + etiquetaFinal + ">"
 						buffer += ">];}\n"
 					default:
-						Salid_comando += "Tipo desconocido" + "\n"
+						fmt.Println("Tipo desconocido")
+						//Salid_comando += "Tipo desconocido" + "\n"
 					}
 				}
 			}
 
 			buffer += "}\n"
+			Salid_comando += buffer
 			file, err2 := os.Create("Tree.dot")
 			if err2 != nil && !os.IsExist(err) {
 				log.Fatal(err2)
@@ -1484,7 +1494,7 @@ func ReporteTree(path string, id string) {
 			}
 
 			val_rutadis = "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/"
-			Salid_comando += "Reporte de Arbol creado exitosamente" + "\n"
+			//Salid_comando += "Reporte de Arbol creado exitosamente" + "\n"
 		}
 	}
 	defer func() {

@@ -2,10 +2,12 @@ package main
 
 import (
 	"bufio"
+	"encoding/binary"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"mimodulo/comandos"
 	"mimodulo/estructuras"
@@ -17,7 +19,16 @@ import (
 )
 
 var Salida_comando string = ""
+var Salida_parti string = ""
 var GraphDot string = ""
+
+type FileList struct {
+	Files []string `json:"files"`
+}
+
+type Particion struct {
+	Nombre string
+}
 
 func main() {
 	Analizar()
@@ -43,9 +54,87 @@ func Analizar() {
 		Salida_comando = ""
 	})
 
+	mux.HandleFunc("/verparti", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		var Content estructuras.Cmd_API
+		body, _ := io.ReadAll(r.Body)
+		json.Unmarshal(body, &Content)
+		particiones, err := Discoselec(Content.Cmd)
+		if err != nil {
+			fmt.Println("Ocurrio un error")
+			return
+		}
+		jsonData, err := json.Marshal(particiones)
+		if err != nil {
+			fmt.Fprintf(w, "Error marshalling data to JSON: %v", err)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(jsonData)
+	})
+
+	mux.HandleFunc("/files", func(w http.ResponseWriter, r *http.Request) {
+		files, err := ioutil.ReadDir("Discos/MIA/P2")
+		if err != nil {
+			fmt.Fprintf(w, "Error reading directory: %v", err)
+			return
+		}
+
+		var fileList FileList
+		for _, file := range files {
+			if !file.IsDir() {
+				fileList.Files = append(fileList.Files, file.Name())
+			}
+		}
+		jsonData, err := json.Marshal(fileList)
+		if err != nil {
+			fmt.Fprintf(w, "Error marshalling data to JSON: %v", err)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(jsonData)
+	})
+
 	fmt.Println("Servidor en el puerto 5000")
 	handler := cors.Default().Handler(mux)
 	log.Fatal(http.ListenAndServe(":5000", handler))
+}
+
+func Discoselec(discona string) ([]string, error) {
+	var empty [100]byte
+	mbr := estructuras.Mbr{}
+	path := "/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/Discos/MIA/P2/" + discona
+	disco, err := os.OpenFile(path, os.O_RDWR, 0660)
+	particiones := []Particion{}
+	if err != nil {
+		mens_error(err)
+	}
+	disco.Seek(0, 0)
+	err = binary.Read(disco, binary.BigEndian, &mbr)
+
+	if err != nil {
+		mens_error(err)
+	}
+	if mbr.Mbr_tamano != empty {
+		for i := 0; i < 4; i++ {
+			name := string(mbr.Mbr_partition[i].Part_name[:])
+			name = strings.Trim(name, "\x00")
+			if name != "" {
+				fmt.Println(name)
+				particion := Particion{Nombre: name}
+				particiones = append(particiones, particion)
+			}
+		}
+	}
+
+	// Convert particiones slice to []string
+	var particionesStr []string
+	for _, p := range particiones {
+		particionesStr = append(particionesStr, p.Nombre)
+	}
+	return particionesStr, nil
 }
 
 func Split_comando(comando string) {
@@ -131,11 +220,6 @@ func Ejecutar_comando(arre_coman []string) {
 		comandos.Salid_comando = ""
 		comandos.Mkgrp(arre_coman)
 		Salida_comando += comandos.Salid_comando
-	} else if data == "mkfile" {
-		/*========================MKFILE================== */
-		comandos.Salid_comando = ""
-		comandos.Mkfile(arre_coman)
-		Salida_comando += comandos.Salid_comando
 	} else {
 		/*=======================ERROR=================== */
 		Salida_comando += "Error: El comando no fue reconocido." + "\n"
@@ -143,7 +227,7 @@ func Ejecutar_comando(arre_coman []string) {
 }
 
 func pause() {
-	Salida_comando += "[MENSAJE] Presiona enter para continuar..." + "\n"
+	Salida_comando += "Pausa: Presiona enter para continuar..." + "\n"
 }
 
 func Execute(arre_coman []string) {

@@ -1,15 +1,142 @@
 import './App.css';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-
+import { graphviz } from "d3-graphviz"
+import { useFileSystem } from 'use-file-system';
+import Select from 'react-select';
+import { FilePicker } from 'react-file-picker';
 
 function App() {
+  const [fileList, setFileList] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const [fileLists, setFileLists] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState(null);
+
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+
+  const handleUploadClick = () => {
+    const fileInput = document.getElementById('fileInput');
+    fileInput.click();
+    fileInput.addEventListener('change', async (event) => {
+      const file = event.target.files[0];
+      if (!file) {
+        return; // Handle empty file selection
+      }
+      try {
+        const text = await file.text();
+        console.log(text)
+      } catch (error) {
+        console.error('Error reading file:', error);
+        // Handle file reading errors (e.g., display error message)
+      }
+    });
+  };
+  const handleChange = (selected) => {
+    setSelectedOption(selected);
+  };
+  const handleChanges = (selected) => {
+    setSelectedOptions(selected);
+  };
   
 
+  const outerStyle = {
+    backgroundColor: 'black', // Using camelCase for backgroundColor
+    padding: '1.5rem',
+    borderRadius: '10px',
+    margin: '2rem',
+  };
 
-  const [data,setdata]= useState([]);
+  const innerStyle = {
+    paddingLeft: '2%',
+    paddingRight: '2%',
+    paddingBottom: '2%',
+  };
+
+  function Parti(event){
+    event.preventDefault();
+    const comando = selectedOption.value
+
+    var datos = {
+        "Cmd": comando
+    };
+
+    axios.post("http://localhost:5000/verparti", datos)
+    .then(
+      (response) => {
+        const files = response.data;
+        setFileLists(files);
+        
+      }
+    );
+        
+  }
+
+  function ElectPar (event){
+    event.preventDefault();
+    let selectedValue= selectedOption.value
+    let fileNameWithoutExtension = selectedValue.substring(0, selectedValue.lastIndexOf(".dsk"));
+    let part = selectedOptions.value
+    let regex = /\d+$/; // Matches one or more digits at the end of the string
+    let match = part.match(regex);
+    let numericPart = ""
+    if (match) {
+      numericPart = match[0]; // Get the first captured group (numeric part)
+    } else {
+      console.log("No numeric part found");
+    }
+    let combinedText = `${fileNameWithoutExtension}${numericPart}70`; 
+    let textBox = document.getElementById("part");
+    textBox.value = combinedText;
+
+  }
+  function VerD(event){
+    event.preventDefault();
+    const fetchFiles = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/files');
+        const files = response.data.files;
+        setFileList(files);
+      } catch (error) {
+        console.error('Error fetching files:', error);
+      }
+    };
+
+    fetchFiles();
+  }
+
   useEffect(() => {
   }, [])
+
+  function Mandarss(event){
+    event.preventDefault();
+
+    var comando = document.getElementById('parametr').value;
+
+    var datos = {
+        "Cmd": comando
+    };
+
+    axios.post("http://localhost:5000/analizar", datos)
+    .then(
+        (response) => {
+            console.log(response.data);
+            var respo = response.data;
+            const textoSinResultado = respo.replace(/"result":\s*"/, '');
+            const variableSinLlave = textoSinResultado.replace(/^\{/, "");
+            const variableSinLlaves = variableSinLlave.replace(/}$/, "");
+            console.log(variableSinLlaves)
+            graphviz("#graph").renderDot(String(variableSinLlaves))
+            document.getElementById('parametr').value = '';
+        }
+    )
+  }
+
   function Mandars(event){
     event.preventDefault();
 
@@ -42,10 +169,12 @@ function App() {
     event.preventDefault();
 
     var comando = document.getElementById('parametros').value;
-
+    var comandos = document.getElementById('entrada').value;
+    console.log(comandos)
     var datos = {
         "Cmd": comando
     };
+
 
     axios.post("http://localhost:5000/analizar", datos)
     .then(
@@ -178,6 +307,16 @@ function App() {
               <textarea id="entrada" rows="20" cols="50"></textarea>
             </div>
             <div>
+              <input
+                id="fileInput"
+                type="file"
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+              />
+              <button onClick={handleUploadClick}>Cargar Archivo</button>
+              {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
+            </div>
+            <div>
               <p>
                 <div id="boton-y-caja">  
                   <input type="text" id="parametros" placeholder="Ingrese comandos"></input>
@@ -197,8 +336,8 @@ function App() {
       <section id="pantalla2">
         <div class="container px-5">
             <div class="row gx-7 align-items-center">
-                <div class="col-lg-6 order-lg-1">
-                    
+              <div class="col-lg-6 order-lg-1">
+               
                         <h2 class="display-4">Inicio Sesion</h2>
                         
                         <div class="form-outline mb-4">
@@ -212,8 +351,27 @@ function App() {
                         </div>
 
                         <div class="form-outline mb-4">
-                            <input type="password" id="part" class="form-control" />
+                            <input type="text" id="part" class="form-control" disabled value=""  />
                             <label class="form-label" for="form2Example2">Particion</label>
+                            <div>
+                            <button id="log" type="button" class="btn btn-primary btn-block mb-4" onClick={VerD}>VerDiscos</button>
+                            <Select
+                                id="fileSelect"
+                                value={selectedOption} 
+                                onChange={handleChange} 
+                                options={fileList.map((fileName) => ({ value: fileName, label: fileName }))} 
+                              />
+                              <p>Opción seleccionada Disco: {selectedOption ? selectedOption.value : 'Ninguna'}</p>
+                              <button id="log" type="button" class="btn btn-primary btn-block mb-4" onClick={Parti}>Elegir Particion</button>
+                              <Select
+                                id="fileSelectP"
+                                value={selectedOptions} 
+                                onChange={handleChanges} 
+                                options={fileLists.map((fileName) => ({ value: fileName, label: fileName }))} 
+                              />
+                              <p>Opción seleccionada Particion: {selectedOptions ? selectedOptions.value : 'Ninguna'}</p>
+                              <button id="log" type="button" class="btn btn-primary btn-block mb-4" onClick={ElectPar}>Confirmar</button>
+                            </div>
                         </div>
                         <button id="log" type="button" class="btn btn-primary btn-block mb-4" onClick={Login}>Inicio</button>
                 </div>
@@ -222,10 +380,18 @@ function App() {
       </section>
 
       <section id="pantalla3">
-        <div id="entra-y-salida">
-          <h2>Archivos</h2>
+          <h2>Visualizacion de Reportes</h2>
+          <div id="boton-y-caja">  
+                  <input type="text" id="parametr" placeholder="Ingrese comandos"></input>
+                  <button class="btn btn-primary rounded-pill" onClick={Mandarss}>Analizar</button>
+          </div>
           
-        </div>
+          <div className="bg-dark p-4 rounded m-5" style={outerStyle}>
+            <div style={innerStyle}>
+              <h4 style={{ color: 'white', marginBottom: '1.5%', marginTop: '0.5%' }}>Reporte:</h4>
+              <div id="graph"></div>
+            </div>
+          </div>
       </section>
       </div>
 

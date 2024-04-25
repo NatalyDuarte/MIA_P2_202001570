@@ -8,6 +8,8 @@ Mkdisk -unit=k -size=51200 -fit=BF
 fdisk -type=P -unit=b -name=Part1 -size=10485760 -driveletter=A -fit=BF
 fdisk -type=P -unit=k -name=Part2 -size=10240 -driveletter=A -fit=BF
 
+fdisk -type=P -unit=k -name=Part3 -size=10240 -driveletter=B -fit=BF
+
 #DISCO 1
 mount -driveletter=A -name=Part1
 mount -driveletter=A -name=Part2

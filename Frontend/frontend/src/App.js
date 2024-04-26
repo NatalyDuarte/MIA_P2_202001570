@@ -13,6 +13,30 @@ function App() {
   const [fileLists, setFileLists] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState(null);
 
+
+  const [mostrarOpciones, setMostrarOpciones] = useState(false);
+  const [carpetaSeleccionada, setCarpetaSeleccionada] = useState('');
+
+  const toggleOpciones = () => {
+    setMostrarOpciones(!mostrarOpciones);
+  };
+
+  const handleChangec = (event) => {
+    setCarpetaSeleccionada(event.target.value);
+  };
+
+  const [mostrarOpcionesc, setMostrarOpcionesd] = useState(false);
+  const [carpetaSeleccionadad, setCarpetaSeleccionadad] = useState('');
+
+  const toggleOpcionesd = () => {
+    setMostrarOpcionesd(!mostrarOpcionesc);
+  };
+
+  const handleChangear = (event) => {
+    setCarpetaSeleccionadad(event.target.value);
+  };
+
+
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -31,6 +55,9 @@ function App() {
       try {
         const text = await file.text();
         console.log(text)
+        var entradaActual = document.getElementById('entrada').value;
+        var nuevoContenido = entradaActual + text + "\n \n" ;
+        document.getElementById('entrada').value = nuevoContenido;
       } catch (error) {
         console.error('Error reading file:', error);
         // Handle file reading errors (e.g., display error message)
@@ -67,6 +94,26 @@ function App() {
     };
 
     axios.post("http://localhost:5000/verparti", datos)
+    .then(
+      (response) => {
+        const files = response.data;
+        setFileLists(files);
+        
+      }
+    );
+        
+  }
+
+  function VerCar(event){
+    event.preventDefault();
+    const comand = selectedOption.value
+    const comandos = document.getElementById('part').value;
+    const comando = comand +","+comandos
+    var datos = {
+        "Cmd": comando
+    };
+
+    axios.post("http://localhost:5000/vercar", datos)
     .then(
       (response) => {
         const files = response.data;
@@ -168,9 +215,8 @@ function App() {
   function Mandar(event){
     event.preventDefault();
 
-    var comando = document.getElementById('parametros').value;
-    var comandos = document.getElementById('entrada').value;
-    console.log(comandos)
+    var comando = document.getElementById('entrada').value;
+    
     var datos = {
         "Cmd": comando
     };
@@ -191,7 +237,6 @@ function App() {
             var entradaActual = document.getElementById('entrada').value;
             var nuevoContenido = entradaActual + comando + "\n \n" ;
             document.getElementById('entrada').value = nuevoContenido;
-            document.getElementById('parametros').value = '';
         }
     )
   }
@@ -309,9 +354,18 @@ function App() {
             <div>
               <p>
                 <div id="boton-y-caja">  
-                  <input type="text" id="parametros" placeholder="Ingrese comandos"></input>
                   <button class="btn btn-primary rounded-pill" onClick={Mandar}>Analizar</button>
                 </div>
+                <div>
+                    <input
+                      id="fileInput"
+                      type="file"
+                      style={{ display: 'none' }}
+                      onChange={handleFileChange}
+                    />
+                    <button onClick={handleUploadClick}>Cargar Archivo</button>
+                    {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
+                  </div>
               </p>
             </div>
           </div>
@@ -430,7 +484,30 @@ function App() {
               <textarea id="salidas" rows="20" cols="50"></textarea>
             </div>
           </div>
+          
+         
         </div>
+        <div>
+      <button onClick={toggleOpciones}>
+        {mostrarOpciones ? 'Ocultar opciones' : 'Mostrar Carpetas'}
+      </button>
+      {mostrarOpciones && (
+        <select value={carpetaSeleccionada} onChange={handleChangec}>
+          <option value="carpeta0">Carpeta 0</option>
+          <option value="carpeta1">Carpeta 1</option>
+        </select>
+      )}
+    </div>
+    <div>
+      <button onClick={toggleOpcionesd}>
+        {mostrarOpcionesc ? 'Ocultar opciones' : 'Mostrar Archivos'}
+      </button>
+      {mostrarOpcionesc && (
+        <select value={carpetaSeleccionadad} onChange={handleChangear}>
+          <option value="carpeta0">user.txt</option>
+        </select>
+      )}
+    </div>
       </section>
     </div>
 

@@ -93,7 +93,7 @@ function App() {
         "Cmd": comando
     };
 
-    axios.post("http://localhost:5000/verparti", datos)
+    axios.post("http://18.223.29.29/verparti", datos)
     .then(
       (response) => {
         const files = response.data;
@@ -113,7 +113,7 @@ function App() {
         "Cmd": comando
     };
 
-    axios.post("http://localhost:5000/vercar", datos)
+    axios.post("http://18.223.29.29/vercar", datos)
     .then(
       (response) => {
         const files = response.data;
@@ -146,7 +146,7 @@ function App() {
     event.preventDefault();
     const fetchFiles = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/files');
+        const response = await axios.get('http://18.223.29.29/files');
         const files = response.data.files;
         setFileList(files);
       } catch (error) {
@@ -169,7 +169,7 @@ function App() {
         "Cmd": comando
     };
 
-    axios.post("http://localhost:5000/analizar", datos)
+    axios.post("http://18.223.29.29/analizar", datos)
     .then(
         (response) => {
             console.log(response.data);
@@ -193,7 +193,7 @@ function App() {
         "Cmd": comando
     };
 
-    axios.post("http://localhost:5000/analizar", datos)
+    axios.post("http://18.223.29.29/analizar", datos)
     .then(
         (response) => {
             console.log(response.data);
@@ -222,7 +222,7 @@ function App() {
     };
 
 
-    axios.post("http://localhost:5000/analizar", datos)
+    axios.post("http://18.223.29.29/analizar", datos)
     .then(
         (response) => {
             console.log(response.data);
@@ -250,7 +250,7 @@ function App() {
       "Cmd": comando
     };
 
-    axios.post("http://localhost:5000/analizar", datos)
+    axios.post("http://18.223.29.29/analizar", datos)
     .then(
         (response) => {
               console.log(response.data);
@@ -291,7 +291,7 @@ function App() {
       "Cmd": comando
     };
 
-    axios.post("http://localhost:5000/analizar", datos)
+    axios.post("http://18.223.29.29/analizar", datos)
     .then(
         (response) => {
               console.log(response.data);

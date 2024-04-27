@@ -35,25 +35,25 @@ unmount -id=A170
 
 #REPORTES---------------------------------------------------
 #DISCO 1
-rep -id=A -Path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte1.jpg -name=mbr
-rep -id=A -Path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte2.jpg -name=disk
+rep -id=A -Path=Backend/reports/reporte1.jpg -name=mbr
+rep -id=A -Path=Backend/reports/reporte2.jpg -name=disk
 
 #DISCO 2
-rep -id=B -Path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte3.jpg -name=mbr
-rep -id=B -Path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte4.jpg -name=disk
+rep -id=B -Path=Backend/reports/reporte3.jpg -name=mbr
+rep -id=B -Path=Backend/reports/reporte4.jpg -name=disk
 
 #CREACION DE SISTEMA DE ARCHIVOS------------------------------------------------
 mkfs -type=full -id=A270 -fs=2fs
 
 #------------------------REPORTES 1----------------
-rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte1_sb.jpg -name=sb
-rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte1_tree.jpg -name=tree
+rep -id=A270 -path=Backend/reports/reporte1_sb.jpg -name=sb
+rep -id=A270 -path=Backend/reports/reporte1_tree.jpg -name=tree
 
 
 #LOGIN------------------------------------------------
 login -user=root -pass=123 -id=A270
 
-rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte5_inode.jpg -name=inode
-rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte5_block.jpg -name=block
-rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte5_bm_inode.jpg -name=bm_inode
-rep -id=A270 -path=/home/nataly/Documentos/Mia lab/Proyecto2/MIA_P2_202001570/Backend/reports/reporte5_bm_block.jpg -name=bm_block
+rep -id=A270 -path=Backend/reports/reporte5_inode.jpg -name=inode
+rep -id=A270 -path=Backend/reports/reporte5_block.jpg -name=block
+rep -id=A270 -path=Backend/reports/reporte5_bm_inode.jpg -name=bm_inode
+rep -id=A270 -path=Backend/reports/reporte5_bm_block.jpg -name=bm_block
